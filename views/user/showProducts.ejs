@@ -1,0 +1,55 @@
+<%- include("../partials/header")%>
+<%- include("../partials/navbar")%>
+
+
+
+
+<div class="container" style="margin-top: 5rem;">
+
+  <% if(userProducts.length == 0){ %> 
+    <div class="row">
+        <div class="col-lg-12">
+            <h1 class="lead display-5 text-center">No Products Yet!!</h1>
+        </div>
+    </div>
+  <% }else{ %>
+
+  <%- include("../partials/flash")%>
+
+  <h6 class="display-6">My Products</h6>
+  
+  <div class="row">
+  <div class="col-lg-8">
+
+  <%for(let item of userProducts){%>
+        <div class="card mb-3" style="width: 90%;">
+          <div class="row g-0">
+            <div class="col-md-4">
+              <img style="width: 200px;" src="<%=item.img%>" alt="...">
+            </div>
+            <div class="col-md-8">
+              <div class="card-body">
+                <h5 class="card-title lead display-6"><%=item.name%></h5>
+                <h6 class="card-title display-6">&#8377; <%=item.price%></h6>
+                <p class="card-text"><%= item.desc.substring(0,100) %>... </p>
+                <a href="/user/<%= currentUser._id %>/products/<%=item._id%>/edit" class="btn btn-warning">Edit</a>
+                <form action="/user/<%=currentUser._id%>/products/<%=item._id%>?_method=DELETE" method="post">
+                  <button class="btn btn-sm btn-danger mt-2">Delete</button>
+                </form>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      <%}%>
+
+      
+      </div>
+      </div>
+     
+    </div>
+  <% } %>   
+</div>
+
+
+<%- include("../partials/footer")%>
