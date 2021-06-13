@@ -1,3 +1,8 @@
+if(process.env.NODE_ENV != 'production'){
+    require('dotenv').config()
+}
+
+
 const express = require('express');
 const app = express();
 const path = require('path');
@@ -14,6 +19,10 @@ const User = require('./models/user');
 const productRoutes = require('./routes/product');
 const authRoutes = require('./routes/auth');
 const cartRoutes = require('./routes/cart');
+const paymentRoutes = require('./routes/payment');
+const userRoutes = require('./routes/user');
+const userProductRoutes = require('./routes/myProducts');
+
 
 
 app.set('view engine','ejs');
@@ -50,6 +59,9 @@ app.use((req,res,next)=>{
 app.use(productRoutes);
 app.use(authRoutes);
 app.use(cartRoutes);
+app.use(paymentRoutes);
+app.use(userRoutes);
+app.use(userProductRoutes);
 
 
 

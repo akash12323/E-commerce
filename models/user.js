@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const passportLocalMongoose = require('passport-local-mongoose');
 const Product = require('./product');
+const Order = require('./order');
 
 
 const userSchema = new mongoose.Schema({
@@ -9,6 +10,12 @@ const userSchema = new mongoose.Schema({
         required:true,
         unique:true
     },
+    address:{
+        type:String
+    },
+    phoneNumber:{
+        type:String
+    },
     cart:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Product'
@@ -16,6 +23,10 @@ const userSchema = new mongoose.Schema({
     myProducts:[{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Product'
+    }],
+    orders:[{
+            type: mongoose.Schema.Types.ObjectId,
+            ref:'Order'
     }]
 });
 
